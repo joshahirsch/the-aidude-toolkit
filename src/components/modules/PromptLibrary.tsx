@@ -32,9 +32,14 @@ export default function PromptLibrary({ session }: { session: SessionType }) {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <p className="text-sm text-muted-foreground">
-        Your saved prompts, personas, and templates from this session. Items are saved locally on your device.
-      </p>
+      <div className="space-y-2">
+        <p className="text-sm text-muted-foreground">
+          Your saved prompts, personas, and templates from this session. Items are saved locally on your device.
+        </p>
+        <div className="rounded-lg border border-border bg-card p-3 text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">Use this at work:</span> Save the pieces you would actually reuse, then export the session bundle or copy a single item into your real workflow.
+        </div>
+      </div>
 
       <div className="flex flex-wrap gap-2">
         {CATEGORIES.map(c => (
@@ -65,7 +70,8 @@ export default function PromptLibrary({ session }: { session: SessionType }) {
                   {item.isFavorite ? <Star className="w-4 h-4 fill-accent text-accent" /> : <StarOff className="w-4 h-4" />}
                 </button>
               </div>
-              <p className="text-xs text-muted-foreground line-clamp-3 mb-3 whitespace-pre-wrap">{item.content}</p>
+              <p className="text-xs text-muted-foreground line-clamp-3 mb-2 whitespace-pre-wrap">{item.content}</p>
+              <p className="text-[11px] text-muted-foreground mb-3">Best next step: paste this into the tool or workflow where you would actually use it, then refine it with a real audience, campaign, or donor segment.</p>
               <div className="flex items-center gap-2">
                 <select value={item.category} onChange={e => updateCategory(item.id, e.target.value)}
                   className="text-xs rounded-lg border border-input bg-card px-2 py-1 outline-none">

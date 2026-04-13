@@ -3,6 +3,11 @@ import { Copy, Check } from 'lucide-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type { SessionType } from '@/types/toolkit';
 
+const SESSION_HINTS: Record<SessionType, string> = {
+  'talk-like-a-human': 'Start with one real donor message you already need to write this week, then adapt it across two channels.',
+  'humanity-at-scale': 'Pick one campaign message and pressure-test how it changes by audience, channel, and editing needs.',
+};
+
 const CHANNELS = [
   { id: 'email', label: 'Donor Email', length: '200-400 words', tone: 'Warm, personal', cta: 'Clear button or link', pacing: 'Story → impact → ask', consistency: 'Core message, mission language', humanEditing: 'Subject line, opening line, stories' },
   { id: 'landing', label: 'Landing Page', length: '300-600 words', tone: 'Compelling, urgent', cta: 'Prominent donate button', pacing: 'Hook → evidence → CTA → social proof', consistency: 'Campaign name, key stats', humanEditing: 'Hero copy, testimonials, imagery' },
@@ -32,9 +37,14 @@ export default function ChannelStudio({ session }: { session: SessionType }) {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <p className="text-sm text-muted-foreground">
-        Start with your core message, then see how to adapt it across different channels.
-      </p>
+      <div className="space-y-2">
+        <p className="text-sm text-muted-foreground">
+          Start with your core message, then see how to adapt it across different channels.
+        </p>
+        <div className="rounded-lg border border-border bg-card p-3 text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">Use this at work:</span> {SESSION_HINTS[session]}
+        </div>
+      </div>
 
       <div>
         <label className="block text-sm font-semibold font-heading mb-1">Core Communication Brief</label>
@@ -55,6 +65,11 @@ export default function ChannelStudio({ session }: { session: SessionType }) {
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
+        <p className="font-semibold text-foreground mb-1">Simple way to use this output</p>
+        <p>Copy one channel guide, pair it with your saved prompt, and use that combination as your starting draft instructions in ChatGPT, Claude, or another writing tool.</p>
       </div>
 
       <div className="space-y-3">

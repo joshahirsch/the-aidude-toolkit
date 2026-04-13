@@ -47,8 +47,13 @@ export default function Landing() {
             Practical AI exercises<br className="hidden md:block" /> for fundraising teams
           </h1>
           <p className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed">
-            A structured companion for two live sessions. Complete guided exercises, build reusable assets, and leave with a toolkit you'll actually use.
+            A structured companion for two live sessions. Complete guided exercises, build reusable assets, and leave with a toolkit you can actually use back at work.
           </p>
+          <div className="mt-6 flex flex-wrap gap-2 text-sm text-muted-foreground">
+            <span className="rounded-full bg-card px-3 py-1.5 border border-border">No login required</span>
+            <span className="rounded-full bg-card px-3 py-1.5 border border-border">Saves locally on your device</span>
+            <span className="rounded-full bg-card px-3 py-1.5 border border-border">Copy or export your work</span>
+          </div>
         </div>
       </section>
 
@@ -109,15 +114,15 @@ export default function Landing() {
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold mt-0.5">1.</span>
-              <span>Open the session that matches the workshop you're in</span>
+              <span>Open the session that matches the workshop you're in.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold mt-0.5">2.</span>
-              <span>Work through exercises on your phone — everything saves locally</span>
+              <span>Work through the exercises on your phone and save the pieces you want to reuse.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold mt-0.5">3.</span>
-              <span>Copy, export, or revisit your work anytime — no login needed</span>
+              <span>Copy or export your session bundle so you can bring prompts, guardrails, and plans back to work.</span>
             </li>
           </ul>
         </div>
