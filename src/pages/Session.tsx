@@ -27,6 +27,7 @@ import PromptLibrary from '@/components/modules/PromptLibrary';
 import WorkflowMapper from '@/components/modules/WorkflowMapper';
 import ActionPlanModule from '@/components/modules/ActionPlanModule';
 import SessionExportCard from '@/components/SessionExportCard';
+import { APP_VERSION } from '@/lib/version';
 
 const ZONE_ICONS: Record<ModuleZone, React.ElementType> = {
   'prompt-lab': BookOpen,
@@ -126,11 +127,19 @@ export default function Session() {
           <button onClick={() => navigate('/')} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back
           </button>
-          <p className="label-caps mb-1">{session === 'talk-like-a-human' ? 'Session 1' : 'Session 2'}</p>
-          <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground">{SESSION_TITLES[session]}</h1>
-          <p className="text-sm text-muted-foreground mt-1.5 max-w-lg">
-            {SESSION_DESCRIPTIONS[session]}
-          </p>
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p className="label-caps mb-1">{session === 'talk-like-a-human' ? 'Session 1' : 'Session 2'}</p>
+              <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground">{SESSION_TITLES[session]}</h1>
+              <p className="text-sm text-muted-foreground mt-1.5 max-w-lg">
+                {SESSION_DESCRIPTIONS[session]}
+              </p>
+            </div>
+            <div className="rounded-lg border border-border bg-background px-3 py-2 text-right">
+              <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Release</p>
+              <p className="text-sm font-semibold text-foreground">{APP_VERSION}</p>
+            </div>
+          </div>
         </div>
       </header>
 
