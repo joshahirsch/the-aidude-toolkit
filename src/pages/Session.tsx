@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Lightbulb, Megaphone, Shield, Users, Rocket, ArrowLeft, ChevronRight } from 'lucide-react';
+import { BookOpen, Megaphone, Shield, Users, Rocket, ArrowLeft, ChevronRight } from 'lucide-react';
 import type { SessionType, ModuleZone, ModuleId } from '@/types/toolkit';
 import { ZONES, MODULE_INFO, SESSION_MODULE_ORDER } from '@/types/toolkit';
 import PromptBuilder from '@/components/modules/PromptBuilder';
@@ -16,7 +16,7 @@ import WorkflowMapper from '@/components/modules/WorkflowMapper';
 import ActionPlanModule from '@/components/modules/ActionPlanModule';
 
 const ZONE_ICONS: Record<ModuleZone, React.ElementType> = {
-  'prompt-lab': Lightbulb,
+  'prompt-lab': BookOpen,
   'channel-studio': Megaphone,
   'voice-trust': Shield,
   'persona-lab': Users,
@@ -42,6 +42,11 @@ const SESSION_TITLES: Record<SessionType, string> = {
   'humanity-at-scale': 'Humanity at Scale',
 };
 
+const SESSION_DESCRIPTIONS: Record<SessionType, string> = {
+  'talk-like-a-human': 'Prompting fundamentals, channel adaptation, and voice protection for fundraising communications.',
+  'humanity-at-scale': 'Authentic donor communications with personas, guardrails, and ethical AI practices.',
+};
+
 export default function Session() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
@@ -60,7 +65,7 @@ export default function Session() {
   if (activeModule && ActiveComponent) {
     return (
       <div className="min-h-screen bg-background">
-        <header className="sticky top-0 z-20 bg-card/95 backdrop-blur border-b border-border px-4 py-3">
+        <header className="sticky top-0 z-20 bg-card border-b border-border px-4 py-3">
           <div className="container max-w-3xl mx-auto flex items-center gap-3">
             <button onClick={() => setActiveModule(null)} className="text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="w-5 h-5" />
@@ -83,22 +88,21 @@ export default function Session() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-hero text-primary-foreground px-4 pt-6 pb-8">
+      <header className="bg-card border-b border-border px-4 pt-6 pb-6">
         <div className="container max-w-3xl mx-auto">
-          <button onClick={() => navigate('/')} className="flex items-center gap-1.5 text-sm text-primary-foreground/60 hover:text-primary-foreground/90 mb-4 transition-colors">
+          <button onClick={() => navigate('/')} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back
           </button>
-          <h1 className="font-heading text-2xl md:text-3xl font-bold">{SESSION_TITLES[session]}</h1>
-          <p className="text-sm text-primary-foreground/60 mt-1">
-            {session === 'talk-like-a-human'
-              ? 'Master prompting fundamentals, adapt across channels, and protect your voice.'
-              : 'Build authentic donor communications with personas, guardrails, and ethical AI practices.'}
+          <p className="label-caps mb-1">{session === 'talk-like-a-human' ? 'Session 1' : 'Session 2'}</p>
+          <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground">{SESSION_TITLES[session]}</h1>
+          <p className="text-sm text-muted-foreground mt-1.5 max-w-lg">
+            {SESSION_DESCRIPTIONS[session]}
           </p>
         </div>
       </header>
 
-      {/* Bottom nav */}
-      <nav className="sticky top-0 z-20 bg-card/95 backdrop-blur border-b border-border">
+      {/* Zone tabs */}
+      <nav className="sticky top-0 z-20 bg-card border-b border-border">
         <div className="container max-w-3xl mx-auto flex overflow-x-auto scrollbar-none">
           {orderedZones.map(z => {
             const Icon = ZONE_ICONS[z.id];
@@ -118,14 +122,14 @@ export default function Session() {
 
       {/* Module list */}
       <main className="px-4 py-6">
-        <div className="container max-w-3xl mx-auto space-y-3">
+        <div className="container max-w-3xl mx-auto space-y-2">
           {ZONES.find(z => z.id === activeZone)!.modules.map(mId => {
             const info = MODULE_INFO[mId];
             return (
               <button key={mId} onClick={() => setActiveModule(mId)}
-                className="w-full text-left flex items-center gap-4 p-4 rounded-xl bg-card shadow-card border border-border hover:border-primary/30 hover:shadow-elevated transition-all group">
+                className="w-full text-left flex items-center gap-4 p-4 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group">
                 <div className="flex-1">
-                  <h3 className="font-heading font-semibold text-sm text-card-foreground group-hover:text-primary transition-colors">
+                  <h3 className="font-heading font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
                     {info.title}
                   </h3>
                   <p className="text-xs text-muted-foreground mt-0.5">{info.description}</p>

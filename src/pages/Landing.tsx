@@ -1,37 +1,29 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Lightbulb, Megaphone, Shield, Users, Rocket, ArrowRight, Sparkles } from 'lucide-react';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
-};
+import { ArrowRight, BookOpen, Megaphone, Shield, Users, Rocket } from 'lucide-react';
 
 const sessions = [
   {
     id: 'talk-like-a-human',
+    label: 'Session 1',
     title: 'Talk Like a Human',
-    subtitle: 'Session 1',
-    description: 'Master prompt engineering for fundraising. Build structured prompts, adapt across channels, and protect your authentic voice.',
-    tags: ['Prompt Building', 'Channel Adaptation', 'Voice Protection'],
-    gradient: 'from-primary to-accent',
+    description: 'Build structured prompts, adapt messages across channels, and protect your authentic voice in every fundraising communication.',
+    tags: ['Prompt Structure', 'Channel Adaptation', 'Voice Protection'],
   },
   {
     id: 'humanity-at-scale',
+    label: 'Session 2',
     title: 'Humanity at Scale',
-    subtitle: 'Session 2',
-    description: 'Create authentic donor communications at scale. Build AI personas, set ethical guardrails, and design personalized experiences.',
-    tags: ['Donor Authenticity', 'Persona Design', 'Ethical AI'],
-    gradient: 'from-secondary to-primary',
+    description: 'Create fundraising personas, define ethical guardrails, and design donor communications that stay human at every touchpoint.',
+    tags: ['Persona Design', 'Ethical Guardrails', 'Donor Authenticity'],
   },
 ];
 
-const modules = [
-  { icon: Lightbulb, label: 'Prompt Lab', desc: 'Build, compare, and refine prompts' },
-  { icon: Megaphone, label: 'Channel Studio', desc: 'Adapt messages across formats' },
-  { icon: Shield, label: 'Voice + Trust', desc: 'Define guardrails and authenticity' },
-  { icon: Users, label: 'Persona Lab', desc: 'Create fundraising AI personas' },
-  { icon: Rocket, label: 'Action Kit', desc: 'Save work and plan next steps' },
+const zones = [
+  { icon: BookOpen, label: 'Prompt Lab', desc: 'Build, compare, and refine structured prompts' },
+  { icon: Megaphone, label: 'Channel Studio', desc: 'Adapt one message across communication formats' },
+  { icon: Shield, label: 'Voice + Trust', desc: 'Define guardrails, score authenticity, set ethics' },
+  { icon: Users, label: 'Persona Lab', desc: 'Create fundraising-specific AI personas' },
+  { icon: Rocket, label: 'Action Kit', desc: 'Save your work, map workflows, plan next steps' },
 ];
 
 export default function Landing() {
@@ -39,91 +31,102 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Header bar */}
+      <header className="border-b border-border bg-card px-4 py-4">
+        <div className="container max-w-3xl mx-auto flex items-center justify-between">
+          <span className="font-heading font-bold text-base text-foreground tracking-tight">the AI dude</span>
+          <span className="text-xs text-muted-foreground">Festival del Fundraising 2026</span>
+        </div>
+      </header>
+
       {/* Hero */}
-      <section className="bg-hero text-secondary-foreground px-4 pt-12 pb-16 md:pt-20 md:pb-24">
-        <div className="container max-w-3xl mx-auto text-center">
-          <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-1.5 text-sm font-medium text-primary-foreground/90 mb-6">
-              <Sparkles className="w-4 h-4" />
-              Festival del Fundraising 2026
-            </div>
-          </motion.div>
-          <motion.h1 initial="hidden" animate="visible" custom={1} variants={fadeUp}
-            className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary-foreground mb-4">
-            The AI Dude
-            <span className="block text-primary-foreground/70 text-2xl md:text-3xl font-medium mt-2">
-              Interactive Toolkit
-            </span>
-          </motion.h1>
-          <motion.p initial="hidden" animate="visible" custom={2} variants={fadeUp}
-            className="text-lg md:text-xl text-primary-foreground/70 max-w-xl mx-auto mb-8">
-            Your companion for two live sessions on AI-powered fundraising.
-            Complete exercises, build reusable assets, and leave with a real toolkit.
-          </motion.p>
+      <section className="px-4 pt-12 pb-10 md:pt-16 md:pb-14">
+        <div className="container max-w-3xl mx-auto">
+          <p className="label-caps mb-4">Interactive Workshop Toolkit</p>
+          <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight mb-4">
+            Practical AI exercises<br className="hidden md:block" /> for fundraising teams
+          </h1>
+          <p className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed">
+            A structured companion for two live sessions. Complete guided exercises, build reusable assets, and leave with a toolkit you'll actually use.
+          </p>
         </div>
       </section>
 
       {/* Session Cards */}
-      <section className="px-4 -mt-8 mb-12">
-        <div className="container max-w-3xl mx-auto grid gap-4 md:grid-cols-2">
-          {sessions.map((s, i) => (
-            <motion.button key={s.id} initial="hidden" animate="visible" custom={i + 3} variants={fadeUp}
+      <section className="px-4 pb-14">
+        <div className="container max-w-3xl mx-auto space-y-3">
+          {sessions.map((s) => (
+            <button key={s.id}
               onClick={() => navigate(`/session/${s.id}`)}
-              className="group text-left rounded-xl bg-card shadow-elevated p-6 hover:shadow-lg transition-all border border-border hover:border-primary/30">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.subtitle}</span>
-              <h2 className="font-heading text-xl font-bold mt-1 mb-2 text-card-foreground group-hover:text-primary transition-colors">
+              className="group w-full text-left rounded-lg bg-card border border-border p-5 md:p-6 hover:border-primary/40 transition-colors">
+              <span className="label-caps">{s.label}</span>
+              <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground mt-1 mb-2">
                 {s.title}
               </h2>
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{s.description}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {s.tags.map(t => (
-                  <span key={t} className="text-xs bg-muted rounded-full px-3 py-1 text-muted-foreground">{t}</span>
+                  <span key={t} className="text-xs bg-muted rounded px-2.5 py-1 text-muted-foreground">{t}</span>
                 ))}
               </div>
               <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
-                Enter session <ArrowRight className="w-4 h-4" />
+                Open session <ArrowRight className="w-4 h-4" />
               </span>
-            </motion.button>
+            </button>
           ))}
         </div>
       </section>
 
-      {/* What You'll Build */}
-      <section className="px-4 mb-16">
+      {/* Zones overview */}
+      <section className="px-4 pb-14">
         <div className="container max-w-3xl mx-auto">
-          <h2 className="font-heading text-2xl font-bold text-center mb-2">What you'll build</h2>
-          <p className="text-center text-muted-foreground mb-8">Five modules of structured exercises and reusable templates</p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {modules.map((m, i) => (
-              <motion.div key={m.label} initial="hidden" animate="visible" custom={i + 5} variants={fadeUp}
-                className="flex items-start gap-3 p-4 rounded-lg bg-card shadow-card border border-border">
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <m.icon className="w-5 h-5 text-primary" />
+          <p className="label-caps mb-2">What you'll work on</p>
+          <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-6">
+            Five zones of structured exercises
+          </h2>
+          <div className="space-y-2">
+            {zones.map((z) => (
+              <div key={z.label}
+                className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border">
+                <div className="flex-shrink-0 w-9 h-9 rounded-md bg-muted flex items-center justify-center">
+                  <z.icon className="w-4.5 h-4.5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-sm text-card-foreground">{m.label}</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{m.desc}</p>
+                  <h3 className="font-heading font-semibold text-sm text-foreground">{z.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5">{z.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Use it live */}
-      <section className="px-4 mb-16">
-        <div className="container max-w-3xl mx-auto text-center bg-muted rounded-xl p-8">
-          <h3 className="font-heading font-bold text-lg mb-2">Use this during the session</h3>
-          <p className="text-sm text-muted-foreground max-w-md mx-auto">
-            Complete exercises on your phone. Everything saves locally — revisit your work anytime, no login needed.
-          </p>
+      {/* How it works */}
+      <section className="px-4 pb-14">
+        <div className="container max-w-3xl mx-auto bg-card border border-border rounded-lg p-6 md:p-8">
+          <p className="label-caps mb-2">How it works</p>
+          <h3 className="font-heading font-bold text-lg text-foreground mb-3">Use this during the session and after</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold mt-0.5">1.</span>
+              <span>Open the session that matches the workshop you're in</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold mt-0.5">2.</span>
+              <span>Work through exercises on your phone — everything saves locally</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold mt-0.5">3.</span>
+              <span>Copy, export, or revisit your work anytime — no login needed</span>
+            </li>
+          </ul>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-4 pb-8">
-        <div className="container max-w-3xl mx-auto text-center text-xs text-muted-foreground">
-          <p>The AI Dude × Festival del Fundraising</p>
+      <footer className="px-4 pb-10">
+        <div className="container max-w-3xl mx-auto text-center">
+          <p className="text-xs text-muted-foreground">the AI dude × Festival del Fundraising</p>
         </div>
       </footer>
     </div>
