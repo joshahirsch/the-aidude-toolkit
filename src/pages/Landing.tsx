@@ -34,19 +34,14 @@ export default function Landing() {
     <div className="min-h-screen bg-background">
       {/* Header bar */}
       <header className="border-b border-border bg-card px-4 py-4">
-        <div className="container max-w-3xl mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/ai-dude-wordmark.svg" alt="The AI Dude" className="h-12 w-auto" />
-            <div>
-              <p className="text-xs text-muted-foreground">Interactive workshop toolkit</p>
-            </div>
+        <div className="container max-w-3xl mx-auto flex items-center justify-between gap-4">
+          <div>
+            <p className="font-heading font-bold text-base text-foreground tracking-tight">the AI dude</p>
+            <p className="text-xs text-muted-foreground">Interactive workshop toolkit</p>
           </div>
-          <div className="flex items-center gap-3 rounded-lg border border-border bg-background px-3 py-2">
-            <img src="/festival-logo.svg" alt="Festival del Fundraising" className="h-10 w-auto" />
-            <div>
-              <p className="text-xs font-semibold text-foreground">Festival del Fundraising 2026</p>
-              <p className="text-[11px] text-muted-foreground">Presented for conference workshop use</p>
-            </div>
+          <div className="text-right">
+            <p className="text-xs font-semibold text-foreground">Festival del Fundraising 2026</p>
+            <p className="text-[11px] text-muted-foreground">Release {APP_VERSION}</p>
           </div>
         </div>
       </header>
@@ -142,18 +137,9 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="px-4 pb-10">
-        <div className="container max-w-3xl mx-auto border-t border-border pt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/ai-dude-wordmark.svg" alt="The AI Dude" className="h-8 w-auto" />
-            <div>
-              <p className="text-xs text-muted-foreground">the AI dude × Festival del Fundraising</p>
-              <p className="text-[11px] text-muted-foreground">Release {APP_VERSION}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <img src="/festival-logo.svg" alt="Festival del Fundraising" className="h-8 w-auto" />
-            <p className="text-[11px] text-muted-foreground">Each pushed release gets a visible version update.</p>
-          </div>
+        <div className="container max-w-3xl mx-auto border-t border-border pt-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <p className="text-xs text-muted-foreground">the AI dude × Festival del Fundraising</p>
+          <p className="text-[11px] text-muted-foreground">Release {APP_VERSION} · Each pushed release gets a visible version update.</p>
         </div>
       </footer>
     </div>
