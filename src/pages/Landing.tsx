@@ -36,9 +36,8 @@ export default function Landing() {
       <header className="border-b border-border bg-card px-4 py-4">
         <div className="container max-w-3xl mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <img src="/ai-dude-logo.svg" alt="The AI Dude" className="h-12 w-auto" />
+            <img src="/ai-dude-wordmark.svg" alt="The AI Dude" className="h-12 w-auto" />
             <div>
-              <p className="font-heading font-bold text-base text-foreground tracking-tight">the AI dude</p>
               <p className="text-xs text-muted-foreground">Interactive workshop toolkit</p>
             </div>
           </div>
@@ -145,7 +144,7 @@ export default function Landing() {
       <footer className="px-4 pb-10">
         <div className="container max-w-3xl mx-auto border-t border-border pt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <img src="/ai-dude-logo.svg" alt="The AI Dude" className="h-8 w-auto" />
+            <img src="/ai-dude-wordmark.svg" alt="The AI Dude" className="h-8 w-auto" />
             <div>
               <p className="text-xs text-muted-foreground">the AI dude × Festival del Fundraising</p>
               <p className="text-[11px] text-muted-foreground">Release {APP_VERSION}</p>

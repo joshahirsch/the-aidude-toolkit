@@ -1,0 +1,35 @@
+<svg width="420" height="96" viewBox="0 0 420 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="420" height="96" rx="20" fill="white"/>
+  <text x="16" y="60" fill="#06273B" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="400">the AI dude</text>
+  <g transform="translate(245,8) scale(0.9)">
+    <path d="M78 4C94 10 107 22 112 39C117 55 115 72 106 86C98 99 84 109 68 112C56 114 45 112 34 106C23 100 14 90 9 78C4 66 3 53 6 41C10 29 18 19 28 12C39 4 50 1 63 1C68 1 73 2 78 4Z" fill="#06273B"/>
+    <path d="M57 22C60 22 63 24 63 27C63 30 60 32 57 32C54 32 52 30 52 27C52 24 54 22 57 22Z" fill="white"/>
+    <path d="M70 18C73 18 75 20 75 23C75 26 73 28 70 28C67 28 65 26 65 23C65 20 67 18 70 18Z" fill="white"/>
+    <path d="M82 23C85 23 87 25 87 28C87 31 85 33 82 33C79 33 77 31 77 28C77 25 79 23 82 23Z" fill="white"/>
+    <path d="M92 31C95 31 97 33 97 36C97 39 95 41 92 41C89 41 87 39 87 36C87 33 89 31 92 31Z" fill="white"/>
+    <path d="M55 39L55 87" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M68 34L68 92" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M81 39L81 86" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M93 48L93 78" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M56 45L41 36" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M56 58L41 51" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M56 71L41 66" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M68 45L82 36" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M68 57L83 50" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M81 52L96 44" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M82 66L96 60" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M55 86L69 70" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M68 92L80 76" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M81 86L92 72" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="41" cy="36" r="3" fill="white"/>
+    <circle cx="41" cy="51" r="3" fill="white"/>
+    <circle cx="41" cy="66" r="3" fill="white"/>
+    <circle cx="82" cy="36" r="3" fill="white"/>
+    <circle cx="83" cy="50" r="3" fill="white"/>
+    <circle cx="96" cy="44" r="3" fill="white"/>
+    <circle cx="96" cy="60" r="3" fill="white"/>
+    <circle cx="57" cy="14" r="3" fill="white"/>
+    <circle cx="70" cy="10" r="3" fill="white"/>
+    <circle cx="82" cy="14" r="3" fill="white"/>
+  </g>
+</svg>
