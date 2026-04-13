@@ -42,9 +42,9 @@ export default function Landing() {
       {/* Hero */}
       <section className="px-4 pt-12 pb-10 md:pt-16 md:pb-14">
         <div className="container max-w-3xl mx-auto">
-          <p className="label-caps mb-4">Interactive Workshop Toolkit</p>
+          <p className="label-caps mb-4">Interactive Workshop Toolkit for Festival del Fundraising</p>
           <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight mb-4">
-            Practical AI exercises<br className="hidden md:block" /> for fundraising teams
+            Practical AI exercises<br className="hidden md:block" /> for fundraising team who want to learn more
           </h1>
           <p className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed">
             A structured companion for two live sessions. Complete guided exercises, build reusable assets, and leave with a toolkit you'll actually use.
