@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { buildEthicsText } from '@/lib/export';
 import type { SessionType, EthicsFramework } from '@/types/toolkit';
 
 const EMPTY: EthicsFramework = {
@@ -30,7 +31,7 @@ export default function EthicalGuardrails({ session }: { session: SessionType })
   const update = (key: string, value: string) => setFramework(prev => ({ ...prev, [key]: value }));
 
   const getText = (view: OutputView) => {
-    const base = FIELDS.map(f => `${f.label}: ${(framework as any)[f.key] || '(not set)'}`).join('\n\n');
+    const base = buildEthicsText(framework);
     if (view === 'summary') return `ETHICAL GUARDRAILS — Summary\n\n${base}`;
     if (view === 'team') return `ETHICAL GUARDRAILS — Team Discussion Guide\n\n${base}\n\nDiscussion Questions:\n1. Are there gaps in our current safeguards?\n2. Who needs to be involved in review processes?\n3. What training do we need?`;
     return `ETHICAL GUARDRAILS — Leadership Brief\n\nKey Points:\n- AI Never Does: ${framework.neverDo || '(not set)'}\n- Human Review Required: ${framework.humanReviewRequired || '(not set)'}\n- Privacy Boundaries: ${framework.privacyBoundaries || '(not set)'}\n- Approval Owner: ${framework.approvalOwner || '(not set)'}`;

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { buildWorkflowText } from '@/lib/export';
 import type { SessionType, WorkflowMap } from '@/types/toolkit';
 
 const EMPTY: WorkflowMap = {
@@ -26,7 +27,7 @@ export default function WorkflowMapper({ session }: { session: SessionType }) {
 
   const update = (key: string, value: string) => setWorkflow(prev => ({ ...prev, [key]: value }));
 
-  const exportText = FIELDS.map(f => `${f.label}: ${(workflow as any)[f.key] || '(not set)'}`).join('\n\n');
+  const exportText = buildWorkflowText(workflow);
 
   const copy = () => { navigator.clipboard.writeText(`WORKFLOW MAP\n\n${exportText}`); setCopied(true); setTimeout(() => setCopied(false), 2000); };
 

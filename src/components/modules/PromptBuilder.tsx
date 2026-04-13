@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Copy, Check, RotateCcw, BookmarkPlus, ChevronDown, ChevronUp } from 'lucide-react';
+import { Copy, Check, RotateCcw, BookmarkPlus } from 'lucide-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { buildPromptText } from '@/lib/export';
 import type { SessionType, PromptEntry, SavedLibraryItem } from '@/types/toolkit';
 
 const FIELDS = [
@@ -44,7 +45,7 @@ const EXAMPLES: Record<SessionType, Partial<PromptEntry>> = {
 };
 
 export default function PromptBuilder({ session }: { session: SessionType }) {
-  const [entry, setEntry] = useState<PromptEntry>({ ...EMPTY });
+  const [entry, setEntry] = useLocalStorage<PromptEntry>('toolkit-prompt-current', { ...EMPTY });
   const [stepMode, setStepMode] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -53,13 +54,10 @@ export default function PromptBuilder({ session }: { session: SessionType }) {
 
   const update = (key: string, value: string) => setEntry(prev => ({ ...prev, [key]: value }));
 
-  const assembledPrompt = FIELDS
-    .filter(f => entry[f.key as keyof PromptEntry])
-    .map(f => `**${f.label}:** ${entry[f.key as keyof PromptEntry]}`)
-    .join('\n\n');
+  const assembledPrompt = buildPromptText(entry);
 
   const copyPrompt = () => {
-    navigator.clipboard.writeText(assembledPrompt.replace(/\*\*/g, ''));
+    navigator.clipboard.writeText(assembledPrompt);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -69,7 +67,7 @@ export default function PromptBuilder({ session }: { session: SessionType }) {
       id: Date.now().toString(),
       type: 'prompt',
       title: entry.goal.slice(0, 60) || 'Untitled prompt',
-      content: assembledPrompt.replace(/\*\*/g, ''),
+      content: assembledPrompt,
       tags: [], category: 'appeals', isFavorite: false,
       createdAt: new Date().toISOString(),
     };
@@ -155,7 +153,7 @@ export default function PromptBuilder({ session }: { session: SessionType }) {
         <div className="rounded-xl bg-card border border-border p-4 shadow-card">
           <h3 className="font-heading font-semibold text-sm mb-3">Your Assembled Prompt</h3>
           <div className="text-sm text-card-foreground whitespace-pre-wrap bg-muted rounded-lg p-4 font-mono text-xs leading-relaxed">
-            {assembledPrompt.replace(/\*\*/g, '')}
+            {assembledPrompt}
           </div>
           <div className="flex gap-2 mt-3">
             <button onClick={copyPrompt}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Copy, Check, RotateCcw } from 'lucide-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { buildPersonaText } from '@/lib/export';
 import type { SessionType, PersonaProfile, SavedLibraryItem } from '@/types/toolkit';
 
 const EMPTY: PersonaProfile = {
@@ -39,7 +40,7 @@ export default function PersonaBuilder({ session }: { session: SessionType }) {
   const loadTemplate = (t: typeof TEMPLATES[0]) => setPersona(prev => ({ ...prev, ...t.data }));
   const reset = () => setPersona({ ...EMPTY });
 
-  const exportText = FIELDS.map(f => `${f.label}: ${(persona as any)[f.key] || '(not set)'}`).join('\n');
+  const exportText = buildPersonaText(persona);
 
   const copy = () => { navigator.clipboard.writeText(`PERSONA PROFILE\n\n${exportText}`); setCopied(true); setTimeout(() => setCopied(false), 2000); };
 

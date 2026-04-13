@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { buildVoiceGuideText } from '@/lib/export';
 import type { SessionType, VoiceProfile } from '@/types/toolkit';
 
 const EMPTY: VoiceProfile = {
@@ -19,7 +20,7 @@ export default function VoiceGuardrails({ session }: { session: SessionType }) {
     update('toneWords', words);
   };
 
-  const exportText = `VOICE GUIDELINES\n\nTone: ${profile.toneWords.filter(Boolean).join(', ')}\nSincerity sounds like: ${profile.sinceritySounds}\nRobotic sounds like: ${profile.roboticSounds}\nPhrases to avoid: ${profile.phrasesToAvoid}\nPhrases we use: ${profile.phrasesWeUse}\nDonor trust cues: ${profile.donorTrustCues}\nBrand red flags: ${profile.brandRedFlags}\nEditing reminders: ${profile.editingReminders}`;
+  const exportText = `VOICE GUIDELINES\n\n${buildVoiceGuideText(profile)}`;
 
   const copy = () => { navigator.clipboard.writeText(exportText); setCopied(true); setTimeout(() => setCopied(false), 2000); };
 

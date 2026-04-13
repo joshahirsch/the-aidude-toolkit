@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Copy, Check, Mail } from 'lucide-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { buildActionPlanText } from '@/lib/export';
 import type { SessionType, ActionPlan } from '@/types/toolkit';
 
 const EMPTY: ActionPlan = {
@@ -27,7 +28,7 @@ export default function ActionPlanModule({ session }: { session: SessionType }) 
 
   const update = (key: string, value: string) => setPlan(prev => ({ ...prev, [key]: value }));
 
-  const exportText = `MY 7-DAY ACTION PLAN\nSession: ${session === 'talk-like-a-human' ? 'Talk Like a Human' : 'Humanity at Scale'}\n\n${FIELDS.map(f => `${f.label.replace(/^.{2} /, '')}: ${(plan as any)[f.key] || '(not set)'}`).join('\n\n')}`;
+  const exportText = `MY 7-DAY ACTION PLAN\n\n${buildActionPlanText(session, plan)}`;
 
   const copy = () => { navigator.clipboard.writeText(exportText); setCopied(true); setTimeout(() => setCopied(false), 2000); };
 

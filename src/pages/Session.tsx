@@ -1,7 +1,19 @@
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BookOpen, Megaphone, Shield, Users, Rocket, ArrowLeft, ChevronRight } from 'lucide-react';
-import type { SessionType, ModuleZone, ModuleId } from '@/types/toolkit';
+import type {
+  ActionPlan,
+  AuthenticityScore,
+  EthicsFramework,
+  ModuleId,
+  ModuleZone,
+  PersonaProfile,
+  PromptEntry,
+  SavedLibraryItem,
+  SessionType,
+  VoiceProfile,
+  WorkflowMap,
+} from '@/types/toolkit';
 import { ZONES, MODULE_INFO, SESSION_MODULE_ORDER } from '@/types/toolkit';
 import PromptBuilder from '@/components/modules/PromptBuilder';
 import PromptTeardown from '@/components/modules/PromptTeardown';
@@ -14,6 +26,7 @@ import PersonaBuilder from '@/components/modules/PersonaBuilder';
 import PromptLibrary from '@/components/modules/PromptLibrary';
 import WorkflowMapper from '@/components/modules/WorkflowMapper';
 import ActionPlanModule from '@/components/modules/ActionPlanModule';
+import SessionExportCard from '@/components/SessionExportCard';
 
 const ZONE_ICONS: Record<ModuleZone, React.ElementType> = {
   'prompt-lab': BookOpen,
@@ -47,6 +60,15 @@ const SESSION_DESCRIPTIONS: Record<SessionType, string> = {
   'humanity-at-scale': 'Authentic donor communications with personas, guardrails, and ethical AI practices.',
 };
 
+function readStored<T>(key: string): T | null {
+  try {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) as T : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function Session() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
@@ -59,6 +81,17 @@ export default function Session() {
     const order = SESSION_MODULE_ORDER[session];
     return order.map(zId => ZONES.find(z => z.id === zId)!);
   }, [session]);
+
+  const exportData = useMemo(() => ({
+    prompt: readStored<PromptEntry>('toolkit-prompt-current'),
+    voice: readStored<VoiceProfile>(`toolkit-voice-${session}`),
+    authenticity: readStored<AuthenticityScore>(`toolkit-rubric-${session}`),
+    ethics: readStored<EthicsFramework>(`toolkit-ethics-${session}`),
+    persona: readStored<PersonaProfile>(`toolkit-persona-${session}`),
+    workflow: readStored<WorkflowMap>(`toolkit-workflow-${session}`),
+    actionPlan: readStored<ActionPlan>(`toolkit-action-${session}`),
+    library: readStored<SavedLibraryItem[]>('toolkit-library') ?? [],
+  }), [session]);
 
   const ActiveComponent = activeModule ? MODULE_COMPONENTS[activeModule] : null;
 
@@ -122,22 +155,46 @@ export default function Session() {
 
       {/* Module list */}
       <main className="px-4 py-6">
-        <div className="container max-w-3xl mx-auto space-y-2">
-          {ZONES.find(z => z.id === activeZone)!.modules.map(mId => {
-            const info = MODULE_INFO[mId];
-            return (
-              <button key={mId} onClick={() => setActiveModule(mId)}
-                className="w-full text-left flex items-center gap-4 p-4 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group">
-                <div className="flex-1">
-                  <h3 className="font-heading font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
-                    {info.title}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{info.description}</p>
-                </div>
-                <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-              </button>
-            );
-          })}
+        <div className="container max-w-3xl mx-auto space-y-6">
+          <section className="rounded-xl border border-border bg-card p-5 shadow-card">
+            <p className="label-caps mb-2">Use this after the session too</p>
+            <h2 className="font-heading text-lg font-bold text-foreground mb-2">Turn workshop exercises into real work</h2>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>Build one usable prompt, persona, or guardrail before you leave.</li>
+              <li>Save your best outputs to the library so you can reuse them at work.</li>
+              <li>Export your session bundle at the end and share it with yourself or your team.</li>
+            </ul>
+          </section>
+
+          <div className="space-y-2">
+            {ZONES.find(z => z.id === activeZone)!.modules.map(mId => {
+              const info = MODULE_INFO[mId];
+              return (
+                <button key={mId} onClick={() => setActiveModule(mId)}
+                  className="w-full text-left flex items-center gap-4 p-4 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors group">
+                  <div className="flex-1">
+                    <h3 className="font-heading font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+                      {info.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-0.5">{info.description}</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                </button>
+              );
+            })}
+          </div>
+
+          <SessionExportCard
+            session={session}
+            prompt={exportData.prompt}
+            voice={exportData.voice}
+            authenticity={exportData.authenticity}
+            ethics={exportData.ethics}
+            persona={exportData.persona}
+            workflow={exportData.workflow}
+            actionPlan={exportData.actionPlan}
+            library={exportData.library}
+          />
         </div>
       </main>
     </div>
