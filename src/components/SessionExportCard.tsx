@@ -54,6 +54,9 @@ export default function SessionExportCard(props: SessionExportCardProps) {
       <p className="text-sm text-muted-foreground mb-4">
         Copy or download everything you&apos;ve built in this session so you can use it after the workshop.
       </p>
+      <div className="rounded-lg border border-border bg-background p-3 text-xs text-muted-foreground mb-4">
+        <span className="font-semibold text-foreground">Best use:</span> paste the exported bundle into your notes, project doc, or team planning workflow so the work from this session turns into something actionable.
+      </div>
       <div className="flex flex-wrap gap-2">
         <button
           onClick={copy}

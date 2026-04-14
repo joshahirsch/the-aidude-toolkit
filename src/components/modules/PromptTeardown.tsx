@@ -87,13 +87,19 @@ export default function PromptTeardown({ session }: { session: SessionType }) {
       </button>
 
       {showAnnotations && (
-        <div className="flex flex-wrap gap-2 animate-fade-in">
-          {ex.annotations.map((a, i) => (
-            <span key={i} className="text-xs bg-primary/10 text-primary rounded-full px-3 py-1.5 font-medium">
-              ✓ {a}
-            </span>
-          ))}
-        </div>
+        <>
+          <div className="flex flex-wrap gap-2 animate-fade-in">
+            {ex.annotations.map((a, i) => (
+              <span key={i} className="text-xs bg-primary/10 text-primary rounded-full px-3 py-1.5 font-medium">
+                ✓ {a}
+              </span>
+            ))}
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
+            <p className="font-semibold text-foreground mb-1">Use this at work</p>
+            <p>Take one weak prompt you already use in real fundraising work and rebuild it with role, audience, goal, constraints, tone, and review boundaries before you use it again.</p>
+          </div>
+        </>
       )}
     </div>
   );

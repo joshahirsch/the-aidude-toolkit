@@ -41,9 +41,14 @@ export default function EthicalGuardrails({ session }: { session: SessionType })
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <p className="text-sm text-muted-foreground">
-        Define your organization's responsible AI communication practices. Build a framework your team can reference.
-      </p>
+      <div className="space-y-2">
+        <p className="text-sm text-muted-foreground">
+          Define your organization's responsible AI communication practices. Build a framework your team can reference.
+        </p>
+        <div className="rounded-lg border border-border bg-card p-3 text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">Use this at work:</span> this module becomes more valuable when it reflects your real approval path, privacy boundaries, and donor communication risk tolerance, not idealized policy language.
+        </div>
+      </div>
 
       {FIELDS.map(f => (
         <div key={f.key}>
@@ -66,6 +71,11 @@ export default function EthicalGuardrails({ session }: { session: SessionType })
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
+        <p className="font-semibold text-foreground mb-1">Best next move</p>
+        <p>Share the team discussion or leadership brief version with the actual reviewer, manager, or comms lead who would need to approve AI-assisted donor communications.</p>
       </div>
 
       <button onClick={copy}

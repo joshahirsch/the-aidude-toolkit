@@ -24,7 +24,6 @@ const FIELDS = [
 export default function ActionPlanModule({ session }: { session: SessionType }) {
   const [plan, setPlan] = useLocalStorage<ActionPlan>(`toolkit-action-${session}`, EMPTY);
   const [copied, setCopied] = useState(false);
-  const [showEmail, setShowEmail] = useState(false);
 
   const update = (key: string, value: string) => setPlan(prev => ({ ...prev, [key]: value }));
 
@@ -37,9 +36,14 @@ export default function ActionPlanModule({ session }: { session: SessionType }) 
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <p className="text-sm text-muted-foreground">
-        Turn your session insights into practical next steps. What will you do in the next 7 days?
-      </p>
+      <div className="space-y-2">
+        <p className="text-sm text-muted-foreground">
+          Turn your session insights into practical next steps. What will you do in the next 7 days?
+        </p>
+        <div className="rounded-lg border border-border bg-card p-3 text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">Best use:</span> keep this plan small, real, and testable. One successful workflow pilot is worth more than ten vague AI ideas.
+        </div>
+      </div>
 
       {FIELDS.map(f => (
         <div key={f.key}>
@@ -68,6 +72,11 @@ export default function ActionPlanModule({ session }: { session: SessionType }) 
           </div>
         </div>
       )}
+
+      <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
+        <p className="font-semibold text-foreground mb-1">A strong first test looks like this</p>
+        <p>Choose one real audience, one real message type, one human reviewer, and one success signal you can evaluate within a week.</p>
+      </div>
 
       <div className="flex flex-wrap gap-2">
         <button onClick={copy}

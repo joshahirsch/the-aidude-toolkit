@@ -27,6 +27,7 @@ import PromptLibrary from '@/components/modules/PromptLibrary';
 import WorkflowMapper from '@/components/modules/WorkflowMapper';
 import ActionPlanModule from '@/components/modules/ActionPlanModule';
 import SessionExportCard from '@/components/SessionExportCard';
+import SessionSummaryCard from '@/components/SessionSummaryCard';
 import { APP_VERSION } from '@/lib/version';
 
 const ZONE_ICONS: Record<ModuleZone, React.ElementType> = {
@@ -192,6 +193,16 @@ export default function Session() {
               );
             })}
           </div>
+
+          <SessionSummaryCard
+            session={session}
+            prompt={exportData.prompt}
+            ethics={exportData.ethics}
+            persona={exportData.persona}
+            workflow={exportData.workflow}
+            actionPlan={exportData.actionPlan}
+            library={exportData.library}
+          />
 
           <SessionExportCard
             session={session}
